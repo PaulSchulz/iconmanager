@@ -2,10 +2,10 @@
 ** Introduction
 A tool for collecting, managing and presenting large numbers of icons.
 
-This web application uses Ring[fn:: https://github.com/mmcgrana/ring] and [[Compojure]].
+This web application uses [[https://github.com/mmcgrana/ring][Ring]] and [[https://github.com/weavejester/compojure][Compojure]].
 
-To play around with this example project, you will first need
-[[Leiningen]] installed.
+To play around with this example project, you will first need [[https://github.com/technomancy/leiningen][Leiningen]]
+installed.
 
 Download the project dependencies with:
 #+begin_src shell
@@ -20,21 +20,13 @@ or
   lein ring server-headless
 #+end_src
 
-It also makes use of the [[ring-refresh]] module, which will automatically refresh
-the displayed webpage whenever the source files are changed in 'src/' and 
+It also makes use of the [[https://github.com/weavejester/ring-refresh][Ring-refresh]] module, which will automatically refresh
+the displayed webpage whenever the source files are changed in 'src/' and
 'resource/'.
 
-Or you can compile the project into a war-file ready for deployment to
-a servlet container like [[Tomcat]] or [[Jetty]]:
+Or you can compile the project into a war-file ready for deployment to a servlet
+container like [[http://tomcat.apache.org][Tomcat]] or [[http://jetty.codehaus.org/jetty][Jetty]]
 #+begin_src shell
   lein ring uberwar
 #+end_src
-
-** References
-- <<Ring>>:  https://github.com/mmcgrana/ring
-- <<Ring-refresh>>: https://github.com/weavejester/ring-refresh
-- <<Compujure>>: https://github.com/weavejester/compojure
-- <<Liningen>>: https://github.com/technomancy/leiningen
-- <<Tomcat>>>: http://tomcat.apache.org
-- <<Jetty>>: http://jetty.codehaus.org/jetty
 
