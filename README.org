@@ -2,7 +2,7 @@
 ** Introduction
 A tool for collecting, managing and presenting large numbers of icons.
 
-This web application uses [[Ring]] and [[Compojure]].
+This web application uses Ring[fn:: https://github.com/mmcgrana/ring] and [[Compojure]].
 
 To play around with this example project, you will first need
 [[Leiningen]] installed.
