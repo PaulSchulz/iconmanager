@@ -3,23 +3,31 @@
         icons.templates)
   (:require [clojure.java.io :as io]))
 
-(defn scan-directory [icons]
-  (.list (io/file "resources/public/icons/svg")
-         ))
+(defn scan-directory [metadata]
+  (.list
+   (io/file metadata)
+   ))
 
 ;; TODO: Change this to scan the files in 'metadata' for filenames etc.
 (defn icons-page [options]
-  (let [files (scan-directory {})]
+  (let [files (filter (fn [x] (not= x "incoming"))
+                      (scan-directory (:dir-metadata options)))]
     (page
      [:div
       [:h1 "Icons"]
-      [:p "Directory:" (:dir-icons options)]
-      [:p "Number of Icons"]
+      [:p "Number of Icons: " (count files)]
       ;;    [:p "List of Icons" (.list (io/file (:dir-icons options)))]
       (for [filename files]
-        [:div
-         [:a {:href (str "icon/" "f07d93108f7bffa2d8b6924b11ba6d74ca8aa331")}
-          [:img {:src (str "icons/svg/" filename)}]]
-         ]
+        (let [metadata (read-yaml-svg-file filename)
+              sha1 (:sha1 metadata)]
+          [:div {:style "float:left"}
+           [:a {:href (str "icon/" sha1)}
+            [:img {:src (str "/icons/svg/" sha1 ".svg")}]]
+           (for [tag (:tags metadata)]
+             [:p tag]
+             )
+           ]
+          )
         )
+      [:div {:style "clear:left"}]
       ])))

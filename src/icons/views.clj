@@ -57,68 +57,68 @@
 
 (defn read-yaml-incoming [name]
   (let [data (yaml/parse-string
-              (slurp (str "resources/public/icons/metadata-incoming/"
+              (slurp (str "resources/public/icons/metadata/incoming/"
                           name
                           ".yaml")))]
     data
     )
   )
 
-(defn read-yaml-svg [hash]
-  (let [data (yaml/parse-string
-              (slurp (str "resources/public/icons/metadata/"
-                          hash
-                          ".yaml")))]
-    data
-    )
+(defn random-icon []
   )
 
 (defn random-icons [options]
-  (let [metadata (read-yaml-incoming "spacex-dragon2")
-        metadata2 (read-yaml-svg "f07d93108f7bffa2d8b6924b11ba6d74ca8aa331")
-        ]
-    [:table
-     [:tr [:th "Incoming"] [:th ""] [:th "Processed"]] [:th ""]
-     [:tr
-      [:td [:img {:src (str "icons/incoming/" (:filename metadata))}]]
-      [:td (incoming-details metadata)]
-      [:td [:img {:src "icons/svg/f07d93108f7bffa2d8b6924b11ba6d74ca8aa331.svg"}]]
-      [:td (processed-details metadata2)]
+(let [;;metadata (read-yaml-incoming "spacex-dragon2")
+      metadata2 (read-yaml-svg "f07d93108f7bffa2d8b6924b11ba6d74ca8aa331")
       ]
-     ]))
+  [:table
+   [:tr [:th "Incoming"] [:th ""] [:th "Processed"]] [:th ""]
+   [:tr
+    ;;      [:td [:img {:src (str "icons/incoming/" (:filename metadata))}]]
+    ;;      [:td (incoming-details metadata)]
+    [:td [:img {:src "icons/svg/f07d93108f7bffa2d8b6924b11ba6d74ca8aa331.svg"}]]
+    [:td (processed-details metadata2)]
+    ]
+   ]))
 
 (defn index-page [options]
-  (page
-   [:div
-    [:h1 "Icons"]
-    [:h2 "A tool for collecting, managing and presenting large numbers of icons."]
-    [:h3 "Random Images"]
-    (random-icons options)
-    [:h3 "System Summary"]
-    (system-summary options)
-    [:h3 "Summary"]
-    (icons-summary)
-    [:h3 "Pages"]
-    [:ul
-     [:li [:a {:href "icons"} "Icons"]]
-     [:li [:a {:href "tags"}  "Tags"]]
-     ]
-    ]))
+(page
+ [:div
+  [:h1 "Icons"]
+  [:h2 "A tool for collecting, managing and presenting large numbers of icons."]
+  [:h3 "Random Images"]
+  (random-icons options)
+  [:h3 "System Summary"]
+  (system-summary options)
+  [:h3 "Summary"]
+  (icons-summary)
+  [:h3 "Pages"]
+  [:ul
+   [:li [:a {:href "icons"} "Icons"]]
+   [:li [:a {:href "tags"}  "Tags"]]
+   ]
+  ]))
 
 ;; TODO: routing required
 (defn incoming-page []
-  (page
-   [:div
-    [:h1 "Submitted Icon: "]
-    [:p "Icon"]
-    ]))
+(page
+ [:div
+  [:h1 "Submitted Icon: "]
+  [:p "Icon"]
+  ]))
 
-(defn icon-page []
-  (page
-   [:div
-    [:h1 "Icon: "]
-    [:p "Icon"]
-    ]))
+(defn icon-page [options hash]
+  (let [metadata (read-yaml-svg hash)]
+    (page
+     [:div
+      [:h1 "Icon:"]
+      [:img {:src (str "/icons/svg/" hash ".svg")}]
+      [:table
+       (for [key (keys metadata)]
+         [:tr [:td key] [:td (key metadata)]])
+       ]
+      ]
+     )))
 
 (defn tags-page []
   (page

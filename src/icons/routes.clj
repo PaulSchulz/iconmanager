@@ -13,12 +13,13 @@
   {:dir-incoming "~/Documents/git/monomatch-myriad/icons/incoming"
    :dir-icons    "~/Documents/git/monomatch-myriad/icons/svg"
    :dir-archive  "~/Documents/git/monomatch-myriad/icons/archive"
+   :dir-metadata "resources/public/icons/metadata"
    })
 
 (defroutes main-routes
   (GET "/" [] (index-page options))
   (GET "/icons" [] (icons-page options))
-  (GET "/icon"  [] (icon-page))
+  (GET "/icon/:hash" [hash] (icon-page options hash))
   (GET "/tags"  [] (tags-page))
   (GET "/about" [] (about-page options))
   (route/resources "/")

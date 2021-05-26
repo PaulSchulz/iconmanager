@@ -1,5 +1,6 @@
 (ns icons.templates
-  (:use [hiccup core page]))
+  (:use [hiccup core page])
+  (:require [clj-yaml.core :as yaml]))
 
 (defn page-head []
   [:head
@@ -38,3 +39,20 @@
     ]
    )
   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn read-yaml-svg [hash]
+  (let [data (yaml/parse-string
+              (slurp
+               (str "resources/public/icons/metadata/" hash ".yaml")))]
+    data
+    )
+  )
+
+(defn read-yaml-svg-file [filename]
+(let [data (yaml/parse-string
+(slurp
+(str "resources/public/icons/metadata/" filename)))]
+data
+)
+)
