@@ -1,0 +1,17 @@
+---
+description: "Repository of Icons for the Monomatch Myriad project"
+accepting:   "Accepting small back and white icons, which will be converted to SVG."
+output:      "Black and white SVG images, in a 100x100 bounding box."
+license:     "GNU AFFERO GENERAL PUBLIC LICENSE, Version 3, 19 November 2007"
+process:
+  - "Open PNG file on Inkscape"
+  - "File -> Properties, and set the page size (choose px first), 100 x 100."
+  - "Set the checkbox for Border on top of the drawing."
+  - "In the drawing, adjust the image to occupy as much of the bordered area as possible. Either top to bottom, or left to right."
+  - "Use Path-> Trace Bitmap to generate a path from the image"
+  - "Delete the original image"
+  - "Save the new image as 'processed.svg'."
+  - "Calculate the SHA1 has of the new image (sha1sum processed,svg) and save the image by that name in the 'svg' directory."
+  - "Copy the original png file to archive/"
+  - "Copy any metadata-incoming yaml file to metadata under the same 'sha1sum'.yaml"
+  - "Edit the metadata YAML file, add SHA1 details (at a minimum)"

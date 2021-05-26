@@ -2,7 +2,7 @@
 ** Introduction
 A tool for collecting, managing and presenting large numbers of icons.
 
-This web application uses [[https://github.com/mmcgrana/ring][Ring]] and [[https://github.com/weavejester/compojure][Compojure]].
+This web application uses [[https://github.com/mmcgrana/ring][Ring]], [[https://github.com/weavejester/compojure][Compojure]] and [[https://github.com/weavejester/hiccup][Hiccup]]
 
 To play around with this example project, you will first need [[https://github.com/technomancy/leiningen][Leiningen]]
 installed.
