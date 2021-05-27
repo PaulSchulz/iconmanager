@@ -8,7 +8,6 @@
    (io/file metadata)
    ))
 
-;; TODO: Change this to scan the files in 'metadata' for filenames etc.
 (defn icons-page [options]
   (let [files (filter (fn [x] (not= x "incoming"))
                       (scan-directory (:dir-metadata options)))]
