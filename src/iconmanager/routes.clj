@@ -1,8 +1,8 @@
-(ns icons.routes
+(ns iconmanager.routes
   (:use compojure.core
-        icons.views
-        icons.view-icons
-        icons.view-about
+        iconmanager.views
+        iconmanager.view-icons
+        iconmanager.view-about
         [hiccup.middleware :only (wrap-base-url)]
         ring.middleware.refresh)
   (:require [compojure.route :as route]
@@ -17,11 +17,11 @@
    })
 
 (defroutes main-routes
-  (GET "/" [] (index-page options))
-  (GET "/icons" [] (icons-page options))
+  (GET "/"           []     (index-page options))
+  (GET "/icons"      []     (icons-page options))
   (GET "/icon/:hash" [hash] (icon-page options hash))
-  (GET "/tags"  [] (tags-page))
-  (GET "/about" [] (about-page options))
+  (GET "/tags"       []     (tags-page))
+  (GET "/about"      []     (about-page options))
   (route/resources "/")
   (route/not-found "Page not found"))
 

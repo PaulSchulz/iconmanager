@@ -1,6 +1,6 @@
-(ns icons.view-about
+(ns iconmanager.view-about
   (:use [hiccup core page]
-        icons.templates)
+        iconmanager.templates)
   )
 
 (defn about-page [options]

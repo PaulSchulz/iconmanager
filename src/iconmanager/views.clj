@@ -1,6 +1,6 @@
-(ns icons.views
+(ns iconmanager.views
   (:use [hiccup core page]
-        icons.templates
+        iconmanager.templates
         )
   (:require [clj-yaml.core :as yaml])
   )

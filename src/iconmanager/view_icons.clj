@@ -1,6 +1,6 @@
-(ns icons.view-icons
+(ns iconmanager.view-icons
   (:use [hiccup core page]
-        icons.templates)
+        iconmanager.templates)
   (:require [clojure.java.io :as io]))
 
 (defn scan-directory [metadata]
