@@ -152,10 +152,10 @@ body > footer > form {
 
 /************** Font list **************/
 
-#fonts {
+#icons {
 }
 
-ul.fontlist {
+ul.iconlist {
   display: block;
   text-align: center;
   margin: 0 0 0 20px;
@@ -164,11 +164,11 @@ ul.fontlist {
   overflow: auto;
 }
 
-ul.fontlist li {
-  text-align: left;
+ul.iconlist li {
+  text-align: center;
   display: inline-block;
-  width: 400px;
-  height: 100px;
+  width: 100px;
+  height: 140px;
   vertical-align: top;
   border: 1px solid #ddd;
   border-spacing: 0.7em;
@@ -180,12 +180,12 @@ ul.fontlist li {
   overflow: hidden;
 }
 
-ul.fontlist li > header {
+ul.iconlist li > header {
   color: #888;
   margin-bottom: .5em;
 }
 
-ul.fontlist .installed {
+ul.iconlist .installed {
   color: #000;
   font-size: 50px;
   overflow: hidden;

@@ -31,6 +31,7 @@
   (GET "/tags"       []     (tags-page))
   (GET "/about"      []     (about-page options))
   ;; New pages
+  ;; (GET "index.html"  []     (about-page options))
   (GET "/icondir" [] (.set pref-node "icon-dir" ""))
   (GET "/homedir" [] (System/getProperty "user.home"))
   (route/resources "/")

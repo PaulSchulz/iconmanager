@@ -15,10 +15,6 @@ $(function() {
         event.preventDefault();
         browseDir(iconsDir);
     });
-    $("#installedicons").click(function(event) {
-        event.preventDefault();
-        installedIcons();
-    });
 
     // Get current font directory.
     $.get("icondir").success(function(dir) {
@@ -30,9 +26,9 @@ $(function() {
             }).error(function() {
                 status("Error determining home directory.",true);
             });
-  }).error(function() {
-      status("Error determining icon directory (".concat(iconsDir,")"),true);
-  });
+    }).error(function() {
+        status("Error determining icon directory (".concat(icondir,")"),true);
+    });
 
 }); // End of main entry point.
 

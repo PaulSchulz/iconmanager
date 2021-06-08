@@ -16,17 +16,18 @@
       [:h1 "Icons"]
       [:p "Number of Icons: " (count files)]
       ;;    [:p "List of Icons" (.list (io/file (:dir-icons options)))]
-      (for [filename files]
-        (let [metadata (read-yaml-svg-file filename)
-              sha1 (:sha1 metadata)]
-          [:div {:style "float:left"}
-           [:a {:href (str "icon/" sha1)}
-            [:img {:src (str "/icons/svg/" sha1 ".svg")}]]
-           (for [tag (:tags metadata)]
-             [:p tag]
-             )
-           ]
+
+      [:section {:id "icons"}
+       [:ul {:class "iconlist"}
+        (for [filename files]
+          (let [metadata (read-yaml-svg-file filename)
+                sha1 (:sha1 metadata)]
+            [:li
+             [:header "icon"]
+             [:img {:src (str "/icons/svg/" sha1 ".svg")}]
+             ]
+            )
           )
-        )
-      [:div {:style "clear:left"}]
-      ])))
+        ]]]
+     )
+    ))

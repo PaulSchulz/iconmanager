@@ -6,7 +6,6 @@
   )
 
 (defn system-summary [options]
-
   [:table
    [:tr [:td "Icon Repository:"] [:td "resources/public/icons/"]]
    [:tr [:td "Incoming Directory:"]  [:td "incoming/"] [:td "->"] [:td (:dir-incoming options)]]
