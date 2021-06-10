@@ -66,6 +66,8 @@
      [:aside
       [:nav
        [:ul
+        [:li [:a {:href "/statistics"} "Statistics"]]
+        [:li [:a {:href "/icons"} "Icons"]]
         [:li [:a {:id "fontsinfolder" :href ""} "Scan folder"]]
         [:li [:a {:href "https://github.com/PaulSchulz/iconmanager"} "About"]]
         ]]
@@ -89,18 +91,16 @@
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn read-yaml-svg [hash]
-(let [data (yaml/parse-string
-            (slurp
-             (str "resources/public/icons/metadata/" hash ".yaml")))]
-  data
-  )
-)
-
+;; Utilities
 (defn read-yaml-svg-file [filename]
-(let [data (yaml/parse-string
-            (slurp
-             (str "resources/public/icons/metadata/" filename)))]
-  data
+  (let [data (yaml/parse-string (slurp filename))]
+    data
+    )
   )
-)
+
+(defn read-yaml-svg [options hash]
+  (let [data (read-yaml-svg-file
+              (str (:dir-metadata options) hash ".yaml"))]
+    data
+    )
+  )

@@ -100,18 +100,32 @@
 
 ;; TODO: routing required
 (defn incoming-page []
-(page
- [:div
-  [:h1 "Submitted Icon: "]
-  [:p "Icon"]
-  ]))
+  (page
+   [:div
+    [:h1 "Submitted Icon: "]
+    [:p "Icon"]
+    ]))
+
+(defn icon-image [options hash]
+  (let [data
+        (slurp (str "/home/paul/Documents/git/monomatch-myriad/icons/svg/" hash ".svg"))]
+    {:status 200
+     :headers {"Content-type" "image/svg+xml"}
+     :body data}
+    )
+  )
 
 (defn icon-page [options hash]
-  (let [metadata (read-yaml-svg hash)]
+  (let [metadata (read-yaml-svg options hash)]
     (page
      [:div
       [:h1 "Icon:"]
-      [:img {:src (str "/icons/svg/" hash ".svg")}]
+      [:ul {:class "iconlist"}
+       [:li
+        [:header [:a {:href (str "/icon/" hash)} "icon"]]
+        [:img {:src (str "/icon/" hash ".svg")}]
+        ]
+       ]
       [:table
        (for [key (keys metadata)]
          [:tr [:td key] [:td (key metadata)]])
