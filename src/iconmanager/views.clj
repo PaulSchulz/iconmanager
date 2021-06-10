@@ -115,24 +115,6 @@
     )
   )
 
-(defn icon-page [options hash]
-  (let [metadata (read-yaml-svg options hash)]
-    (page
-     [:div
-      [:h1 "Icon:"]
-      [:ul {:class "iconlist"}
-       [:li
-        [:header [:a {:href (str "/icon/" hash)} "icon"]]
-        [:img {:src (str "/icon/" hash ".svg")}]
-        ]
-       ]
-      [:table
-       (for [key (keys metadata)]
-         [:tr [:td key] [:td (key metadata)]])
-       ]
-      ]
-     )))
-
 (defn tags-page []
   (page
    [:div

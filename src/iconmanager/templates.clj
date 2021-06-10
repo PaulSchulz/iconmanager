@@ -1,6 +1,8 @@
 (ns iconmanager.templates
   (:use [hiccup core page])
-  (:require [clj-yaml.core :as yaml]))
+  (:require [clj-yaml.core :as yaml]
+            [clojure.java.io :as io]
+            ))
 
 (defn page-head []
   [:head
@@ -73,13 +75,6 @@
         ]]
       ]]
     [:main
-     ;; [:section {:id "icons"}
-     ;;  [:ul {:class "iconlist"}
-     ;;   [:li
-     ;;    [:img {:src "icons/svg/f07d93108f7bffa2d8b6924b11ba6d74ca8aa331.svg"}]
-     ;;    [:header "A"]
-
-     ;;    ]]
      contents
      [:section {:id "browser"}]
      ]
@@ -93,8 +88,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Utilities
 (defn read-yaml-svg-file [filename]
-  (let [data (yaml/parse-string (slurp filename))]
-    data
+  (if (.exists (io/as-file filename))
+    (let [data (yaml/parse-string (slurp filename))]
+      data
+      )
+    {}
     )
   )
 
