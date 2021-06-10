@@ -32,27 +32,10 @@
   )
 
 (defn page-footer []
-[:div
- [:hr]
- [:p "Github"]]
-)
-
-(defn page-navigation []
-[:div
- [:p
-  [:a {:href "/"} "Home"]
-  " : "
-  [:a {:href "icons"} "Icons"]
-  " | "
-  [:a {:href "tags"} " Tags"]
-  " | "
-  [:a {:href "about"} "About"]
-  " | "
-  [:a {:href "index.html"} "(New) Index"]
-  ]
- [:hr]
- ]
-)
+  [:div
+   [:hr]
+   [:p "Github"]]
+  )
 
 (defn page [contents]
   (html5
@@ -68,14 +51,16 @@
      [:aside
       [:nav
        [:ul
-        [:li [:a {:href "/statistics"} "Statistics"]]
+        [:li [:a {:href "/"} "Welcome"]]
         [:li [:a {:href "/icons"} "Icons"]]
-        [:li [:a {:id "fontsinfolder" :href ""} "Scan folder"]]
-        [:li [:a {:href "https://github.com/PaulSchulz/iconmanager"} "About"]]
+        [:li [:a {:href "/tags"}  "Tags"]]
+        [:li [:a {:href "/statistics"} "Statistics"]]
+        [:li [:a {:href "/about"} "About"]]
         ]]
       ]]
     [:main
      contents
+     [:section {:id "icons"}]
      [:section {:id "browser"}]
      ]
     [:footer
@@ -87,6 +72,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Utilities
+(defn scan-directory [directory]
+  (.list
+   (io/file directory)
+   ))
+
 (defn read-yaml-svg-file [filename]
   (if (.exists (io/as-file filename))
     (let [data (yaml/parse-string (slurp filename))]
@@ -97,8 +87,8 @@
   )
 
 (defn read-yaml-svg [options hash]
-  (let [data (read-yaml-svg-file
-              (str (:dir-metadata options) hash ".yaml"))]
-    data
-    )
+(let [data (read-yaml-svg-file
+            (str (:dir-metadata options) hash ".yaml"))]
+  data
   )
+)

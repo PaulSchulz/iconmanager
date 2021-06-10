@@ -14,14 +14,6 @@
    ]
   )
 
-(defn icons-summary []
-[:table
- [:tr [:td "Incoming Images"] [:td 0]]
- [:tr [:td "Processed Images"] [:td 0]]
- [:tr [:td "Archived Images"] [:td 0]]
- ]
-)
-
 (defn incoming-details [metadata]
   [:table
    [:tr [:td "Name:"]         [:td (:name metadata)]]
@@ -38,7 +30,7 @@
   )
 
 (defn processed-details [metadata]
-  [:table
+  [:table {:id "metadata"}
    [:tr [:td "Name:"]         [:td (:name metadata)]]
    [:tr [:td "SHA1:"]         [:td (:sha1 metadata)]]
    [:tr [:td "Size:"          [:td (:size metadata)]]]
@@ -54,70 +46,47 @@
    ]
   )
 
-(defn read-yaml-incoming [name]
-  (let [data (yaml/parse-string
-              (slurp (str "resources/public/icons/metadata/incoming/"
-                          name
-                          ".yaml")))]
-    data
-    )
-  )
-
-(defn random-icon []
-  )
-
-(defn random-icons [options]
-(let [;;metadata (read-yaml-incoming "spacex-dragon2")
-      metadata2 (read-yaml-svg "f07d93108f7bffa2d8b6924b11ba6d74ca8aa331")
-      ]
-  [:table
-   [:tr [:th "Incoming"] [:th ""] [:th "Processed"]] [:th ""]
-   [:tr
-    ;;      [:td [:img {:src (str "icons/incoming/" (:filename metadata))}]]
-    ;;      [:td (incoming-details metadata)]
-    [:td [:img {:src "icons/svg/f07d93108f7bffa2d8b6924b11ba6d74ca8aa331.svg"}]]
-    [:td (processed-details metadata2)]
-    ]
-   ]))
-
 (defn index-page [options]
-(page
- [:div
-  [:h1 "Icons"]
-  [:h2 "A tool for collecting, managing and presenting large numbers of icons."]
-  [:h3 "Random Images"]
-  (random-icons options)
-  [:h3 "System Summary"]
-  (system-summary options)
-  [:h3 "Summary"]
-  (icons-summary)
-  [:h3 "Pages"]
-  [:ul
-   [:li [:a {:href "icons"} "Icons"]]
-   [:li [:a {:href "tags"}  "Tags"]]
-   ]
-  ]))
-
-;; TODO: routing required
-(defn incoming-page []
   (page
-   [:div
-    [:h1 "Submitted Icon: "]
-    [:p "Icon"]
+   [:div {:class "text"}
+    [:h1 "Welcome"]
+    [:p "Icon Manager is a tool for collecting and managing a large repository of icons"]
+    [:hr]
+    [:p [:b "Repository: "] (:dir-repo options)]
+    [:h3 "Summary"]
+    [:table
+     [:tr [:td "Icons"]    [:td {:align "right"} (count (scan-directory (:dir-icons options)))]]
+     [:tr [:td "Incoming"] [:td {:align "right"} (count (scan-directory (:dir-incoming options)))]]
+     ]
     ]))
 
+;; TODO Put this into a database
+(defn tags-collect [options]
+  (let [files (filter (fn [x] (not= x "templates")) (scan-directory (:dir-metadata options)))
+        tags {}]
+    (map (fn [l] [:li l])
+         (sort (flatten (map (fn [f]
+                               (:tags (read-yaml-svg-file
+                                       (str (:dir-metadata options) f))))
+                             files))))
+    ))
+
+(defn tags-page [options]
+  (page
+   [:div
+    [:div {:class "text"}
+     [:h1 "Tags"]
+     [:p "Tag Cloud"]
+     ]
+    [:ul {:class "taglist"} (tags-collect options)]
+    ]))
+
+;; Serve SVG file
 (defn icon-image [options hash]
   (let [data
-        (slurp (str "/home/paul/Documents/git/monomatch-myriad/icons/svg/" hash ".svg"))]
+        (slurp (str (:dir-icons options) hash ".svg"))]
     {:status 200
      :headers {"Content-type" "image/svg+xml"}
      :body data}
     )
   )
-
-(defn tags-page []
-  (page
-   [:div
-    [:h1 "Tags"]
-    [:p "Tag Cloud"]
-    ]))

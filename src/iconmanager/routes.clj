@@ -15,7 +15,8 @@
   )
 
 (def options
-  {:dir-incoming "~/Documents/git/monomatch-myriad/icons/incoming"
+  {:dir-repo       "~/Documents/git/monomatch-myriad/icons/"
+   :dir-incoming   "~/Documents/git/monomatch-myriad/icons/incoming"
    :dir-icons    "/home/paul/Documents/git/monomatch-myriad/icons/svg/"
    :dir-archive  "~/Documents/git/monomatch-myriad/icons/archive"
    :dir-metadata "/home/paul/Documents/git/monomatch-myriad/icons/metadata/"
@@ -31,7 +32,7 @@
   (GET "/icons"      []        (icons-page options))
   (GET "/icon/:hash.svg"       [hash] (icon-image options hash))
   (GET "/icon/:hash"           [hash] (icon-page options hash))
-  (GET "/tags"                 []     (tags-page))
+  (GET "/tags"                 []     (tags-page options))
   (GET "/about"                []     (about-page options))
 
   ;; New pages
