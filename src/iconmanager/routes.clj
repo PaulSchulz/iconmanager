@@ -15,7 +15,7 @@
   )
 
 (def options
-  {:dir-repo       "~/Documents/git/monomatch-myriad/icons/"
+  {:dir-repo       nil
    :dir-incoming   "~/Documents/git/monomatch-myriad/icons/incoming"
    :dir-icons    "/home/paul/Documents/git/monomatch-myriad/icons/svg/"
    :dir-archive  "~/Documents/git/monomatch-myriad/icons/archive"
@@ -29,6 +29,7 @@
 
 (defroutes main-routes
   (GET "/"           []        (index-page options))
+  (GET "/repo"       []        (repo-page options))
   (GET "/icons"      []        (icons-page options))
   (GET "/icon/:hash.svg"       [hash] (icon-image options hash))
   (GET "/icon/:hash"           [hash] (icon-page options hash))

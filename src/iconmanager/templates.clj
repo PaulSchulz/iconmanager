@@ -52,6 +52,7 @@
       [:nav
        [:ul
         [:li [:a {:href "/"} "Welcome"]]
+        [:li [:a {:href "/repo"} "Repository"]]
         [:li [:a {:href "/icons"} "Icons"]]
         [:li [:a {:href "/tags"}  "Tags"]]
         [:li [:a {:href "/statistics"} "Statistics"]]

@@ -52,13 +52,34 @@
     [:h1 "Welcome"]
     [:p "Icon Manager is a tool for collecting and managing a large repository of icons"]
     [:hr]
-    [:p [:b "Repository: "] (:dir-repo options)]
+    [:p [:b "Repository: "]
+     (if (:dir-repo options)
+       (:dir-repo options)
+       "Please set the icon repository"
+       )
+     [:a {:href "repo"} "[Set]"]
+     ]
     [:h3 "Summary"]
     [:table
      [:tr [:td "Icons"]    [:td {:align "right"} (count (scan-directory (:dir-icons options)))]]
      [:tr [:td "Incoming"] [:td {:align "right"} (count (scan-directory (:dir-incoming options)))]]
      ]
     ]))
+
+(defn repo-page [options]
+  (page
+   [:div {:class "text"}
+    [:h1 "Repository"]
+    [:hr]
+    [:p [:b "Directory: "]
+     (if (:dir-repo options)
+       (:dir-repo options)
+       "Please set the icon repository"
+       )
+     [:a {:href "repository"} "[Set]"]
+     ]
+    ]
+   ))
 
 ;; TODO Put this into a database
 (defn tags-collect [options]

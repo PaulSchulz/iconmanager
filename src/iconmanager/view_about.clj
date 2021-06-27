@@ -11,7 +11,7 @@
      "sets of icon image files which could be used of an sort computing "
      "projects." ]
     [:p "The main application is to collect icons for the "
-     [:a {:href "https://github.com/PaulSchulz/monomatch-myriad"} "Monomatch Myriad"] " project"
+     [:a {:href "https://github.com/PaulSchulz/monomatch-myriad"} "Monomatch Myriad"] " project "
      "which is an enlarged monomatch game "
      "and requires 10,303 individual distinct icons. (Icon sets are "
      "available for download on the Internet but their licensing conditions are prohibitive.) "
